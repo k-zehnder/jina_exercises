@@ -24,18 +24,33 @@ assert d.blob == b'hello, jina'
 
 # construct a Document with text 'hello, jina' and a blob [1, 2, 3]
 """
-[CANNOT DO THIS! See NOTE below]
+[CANNOT DO THIS!]
+Answer: no, you can NOT do this, `text`, `blob` and `buffer` are mutually exclusive. A Document can have only one of them at the same time
+
 d = Document(
     text='hello, jina',
     blob=[1,2,3]
 )
 """
-# NOTE:  Answer: no, you can NOT do this, `text`, `blob` and `buffer` are mutually exclusive. A Document can have only one of them at
-# the same time
 # assert d.text == 'hello, jina' and d.blob.shape == [1, 2, 3]
 
 # construct a Document with tags={'name': 'jina', 'age': 2}
-# NOTE: this is a cool way you can use jinas ability to handle "unknown attributes"..namely, that if you try to construct a Jina document with an attribute that it doesn't have built in (tensor, blob, text, etc..) then it will automatically be "caught" in to the .tags attributes
+"""My notes:
+this is a cool way you can use jinas ability to handle "unknown attributes"..namely, that if you try to construct a Jina document with an attribute that it doesn't have built in (tensor, blob, text, etc..) then it will automatically be "caught" in to the .tags attributes"""
 d = Document(name="jina", age=2)
 assert d.tags['name'] == 'jina'
+assert d.tags['age'] == 2
+
+######### Just messing around below. :)
+
+from pydantic import BaseModel
+from typing import Optional, List
+
+
+class DoIWork(BaseModel):
+    name: Optional[str] = "jina"
+    age: Optional[int] = 2
+
+pydantic_obj = DoIWork(name="jina", age=2)
+d = Document(**pydantic_obj.dict())
 assert d.tags['age'] == 2
