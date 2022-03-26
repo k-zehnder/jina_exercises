@@ -1,24 +1,3 @@
-
-
-Christian Klose  1:29 PM
-If I attached each sentence to the document as a chunk. How could i retrieve the document by searching for similar texts (chunks) ?
-
-
-7 replies
-Last reply 9 days agoView thread
-
-Vito  1:42 PM
-Hello everyone, maybe it is a very easy question but how do I delete an indexed document, any example?
-
-
-
-5 replies
-Last reply 9 days agoView thread
-
-Kevin Chan  10:15 AM
-Hello everyone, I'm new to Jina.
-Can I send an HTTP request payload to the Jina for search images?
-Here is my code:
 from docarray import DocumentArray
 from jina import Client, requests, Flow
 
